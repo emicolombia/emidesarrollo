@@ -15,6 +15,28 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Custom js -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                emailjs.init('a0B4kLwW-sNy3H7qZ');
+            })();
+        </script>
+        <script type="text/javascript">
+            window.onload = function() {
+                document.getElementById('contact-form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                                 
+                    emailjs.sendForm('service_62s8uul', 'template_i7vnjs1', '#contact-form', 'a0B4kLwW-sNy3H7qZ')
+                        .then(function() {
+                            console.log('SUCCESS!');
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                        });
+                });
+            }
+        </script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -25,16 +47,14 @@
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
-
-                <!--
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link pointer active py-3 px-0 px-lg-3 rounded" onclick="alert('(+57) 314 202 5761')"><i class="fa-solid fa-phone"></i>Linea de atención</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contacto</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Nosotros</a></li>
+                        
                     </ul>
                 </div>
-                -->
             </div>
         </nav>
         <!-- Masthead-->
@@ -94,87 +114,31 @@
                 <!-- Contact Section Form-->
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form id="registerForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Name input-->
+                        
+                        <form id="contact-form">
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <input class="form-control" id="name" type="text" name="name" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="name">Nombre completo</label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">Porfavor escriba su nombre</div>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">Se requiere un nombre</div>
                             </div>
                             <!-- Email address input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Correo electrónico</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">Porfavor escriba un correo valido.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Este correo es invalido</div>
+                                <input class="form-control" id="email" type="email" name="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <label for="email">Correo electronicó</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere un correo valido.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Correo no valido.</div>
                             </div>
                             <!-- Phone number input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">Número de teléfono móvil</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">Porfavor escriba su número</div>
+                                <input class="form-control" id="phone" type="number" name="phone" placeholder="(123) 456-7890" data-sb-validations="required" />
+                                <label for="phone">Número de contacto</label>
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">Se requiere un numero valido.</div>
                             </div>
-                            <!-- Message input-->
+                            <!-- City input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="city" type="text" placeholder="Ciudad de residencia" data-sb-validations="required"></textarea>
-                                <label for="city">Ciudad</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">Se necesita una dirección valida.</div>
-                            </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder"><section class="page-section" id="contact">
-            <div class="container">
-                <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Contact Section Form-->
-                <div class="row justify-content-center">
-                    <div class="col-lg-8 col-xl-7">
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Name input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                <label for="name">Full name</label>
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                            </div>
-                            <!-- Email address input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                <label for="email">Email address</label>
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                            </div>
-                            <!-- Phone number input-->
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                                <label for="phone">Phone number</label>
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                            </div>
-                            <!-- Message input-->
-                            <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                                <label for="message">Message</label>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                                <textarea class="form-control" id="city" name="city" type="text" placeholder="Enter your message here..." data-sb-validations="required"></textarea>
+                                <label for="city">Ciudad de residencia</label>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">Se requiere una ciudad valida.</div>
                             </div>
                             <!-- Submit success message-->
                             <!---->
@@ -183,36 +147,20 @@
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
                                     <div class="fw-bolder">Sus datos han sido enviados!</div>
-                                </div>
+                                   </div>
                             </div>
                             <!-- Submit error message-->
                             <!---->
                             <!-- This is what your users will see when there is-->
                             <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Oops! ha ocurrido un error</div></div>
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">OOps! su mensaje no ha sido enviado</div></div>
                             <!-- Submit Button-->
-                            <button class="btn btn-info btn-xl disabled" id="submitButton" type="submit">Enviar</button>
+                            <input class="btn btn-info btn-xl" id="submitButton" value="Enviar" type="submit">
                         </form>
                     </div>
                 </div>
             </div>
-        </section>!</div>
-                                    
-                                </div>
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            <!-- Submit Button-->
-                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+       </section>
           <img class="w-100" src="assets/imagen.webp">
         <!-- About Section-->
         <section class="page-section bg-primary text-white mb-0" id="about">
@@ -227,12 +175,21 @@
                 </div>
                 <!-- About Section Content-->
                 <div class="row">
-                    <div class="col-lg-4 ms-auto"><p class="lead">
-                        Somos parte de tu vida, somos tu médico personal. </br> </br> Somos una compañía de salud prestadora de servicios de atención médica a domicilio
-                        con más de 40 años de experiencia en diferentes países de Latinoamérica.Brindamos a nuestros afiliados un médico personal 24/7 para solucionar dudas y situaciones de salud de manera presencial o virtual en 30 países.</p></div>
-        <div class="col-lg-4 me-auto"><p class="lead"> 
-                        Nuestro compromiso con la salud de nuestros afiliados es lo más importante y esto se refleja a través de nuestros programas de calidad en el servicio y seguridad del paciente: nos aseguramos de tener actos médicos seguros con el objetivo de aumentar la calidad de vida de todos nuestros clientes.
-                        Velamos por tu salud 24 horas, los 365 días del año con más de 3.200 empleados de los cuales más de 1.000 son médicos*. Somos tu médico de confianza.</p></div>
+                    <div class="col-lg-14 d-flex ¿ms-auto "><p class="lead text-justify">
+                        Somos una compañía de salud prestadora de servicios de atención médica a domicilio con más de 
+                        40 años de experiencia en diferentes países de Latinoamérica. Brindamos a nuestros afiliados un 
+                        médico personal 24/7 para solucionar dudas y situaciones de salud de manera presencial o virtual.
+                        Hacemos parte del Grupo Falck, compañía danesa líder mundial 
+                        en prevención de enfermedades y accidentes; y líderes en asistencia de 
+                        situaciones de emergencia con presencia en 30 países.
+                    
+                        Nuestro compromiso con la salud de nuestros afiliados es lo más importante y esto se refleja 
+                        a través de nuestros programas de calidad en el servicio y seguridad del paciente: nos aseguramos de tener 
+                        actos médicos seguros con el objetivo de aumentar la calidad de vida de todos nuestros clientes.
+ Velamos por tu salud 24 horas, los 365 días del año con más de 3.200 empleados de los cuales más de 1.000 son médicos*. Somos tu médico de confianza.
+
+*
+                    </p></div>
                 </div>
                 <!-- About Section Button-->
                 <div class="text-center mt-4">
@@ -242,48 +199,46 @@
             </div>
         </section>
         <!-- Contact Section-->
-        
+        <div class="container d-grid justify-content-center">
+        <video style="width: 400px" src="assets/video1.mp4" controls></video>
+        <video style="width: 400px" src="assets/video2.mp4" controls></video>
+        </div>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="assets/papa.png" data-bs-interval="10" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/índice.jpg" class="d-block w-100" data-bs-interval="15" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="assets/índice2.jpg" class="d-block w-100" data-bs-interval="10" alt="...">
+              </div>
+            </div>
+          </div>
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container">
                 <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Localización</h4>
-                        <p class="lead mb-0">
-                            EJEMPLO
-                        </p>
-                    </div>
+                   
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Links de redes</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                        <h4 class="text-uppercase mb-4">Redes sociales</h4>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/profile.php?id=100087426946516"><i class="fab fa-fw fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/grupoemiafiliaciones/"><i class="fab fa-fw fa-instagram"></i></a>
                     </div>
                     <!-- Footer About Text-->
-                    <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">Victor M Lara</h4>
-                        <p class="lead mb-0">
-                            Proyecto en proceso
-                            .
-                        </p>
-                    </div>
+                    
+                    <a class="whatsapp fixed-bottom d-flex align-items-center fs-20" href="https://wa.me/message/AED3MNGUZU72F1"><i class="fa-brands fa-whatsapp fs-20"></i>Whatsapp</a>
                 </div>
             </div>
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; EMI 2022</small></div>
+            <div class="container"><small>Copyright &copy; EMICOLOMBIA 2022</small></div>
         </div>        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>
